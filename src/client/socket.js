@@ -6,23 +6,26 @@ import {
     IO_NEWDATA,
 } from '../shared/config';
 
-const socket = socketIOClient(window.location.host);
+import { logData } from './actions/sensor';
+
+export const socket = socketIOClient(window.location.host);
 
 /* eslint-disable no-console */
 // eslint-disable-next-line no-unused-vars
-const setUpSocket = () => {
+export const setUpSocket = (store) => {
     socket.on(IO_CONNECT, () => {
         console.log('[socket.io-client] Connected.');
     });
 
     socket.on(IO_NEWDATA, (serverMessage) => {
-        console.log(`[socket.io-client] New Data: ${serverMessage}`);
+        store.dispatch(logData(serverMessage));
+        // this.props.logData(serverMessage);
+        // /* eslint-disable no-console */
+        // console.log(`[socket.io-client] New Data: ${serverMessage}`);
     });
 
     socket.on(IO_DISCONNECT, () => {
         console.log('[socket.io-client] Disconnected.');
     });
 };
-/* eslint-enable no-console */
 
-export default setUpSocket;

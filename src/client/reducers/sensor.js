@@ -1,16 +1,18 @@
-import Immutable from 'immutable';
+// import Immutable from 'immutable';
 
-// import {
-// } from '../actions/hello';
+import { IO_NEWDATA } from '../../shared/config';
 
-const initialState = Immutable.fromJS({
-    sensorData: '0',
-});
+const initialState = {
+    data: [],
+};
 
 const sensorReducer = (state = initialState, action) => {
     switch (action.type) {
-    case 'sensor':
-        return state;
+    case IO_NEWDATA:
+        /* eslint-disable no-console */
+        console.log(`State: ${state.data}`);
+        console.log(`[socket.io-client] New Data: ${action.payload}`);
+        return { ...state, data: state.data.concat(action.payload) };
     default:
         return state;
     }

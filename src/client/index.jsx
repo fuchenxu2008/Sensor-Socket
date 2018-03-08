@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import setUpSocket from './socket';
+import { setUpSocket } from './socket';
 
 import App from './App';
 import { APP_CONTAINER_SELECTOR } from '../shared/config';
@@ -39,4 +39,4 @@ if (module.hot) {
     });
 }
 
-setUpSocket();
+setUpSocket(store);

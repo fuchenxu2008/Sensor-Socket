@@ -1,12 +1,13 @@
 import React from 'react';
 
 type Props = {
-    message: string
+    message: Object,
+    type: string
 }
 
-const Message = ({ message }: Props) => (
+const Message = ({ message, type }: Props) => (
     <li>
-        { message }
+        {type}: {message.value}, {message.time}
     </li>
 );
 

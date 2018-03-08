@@ -2,9 +2,14 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const chartData = (data) => {
-    const pointsData = data.map(singleData => ({
-        x: new Date(),
-        y: singleData,
+    const temperatureData = data.temperature.map(temperature => ({
+        x: temperature.time,
+        y: temperature.value,
+    }));
+
+    const humidityData = data.humidity.map(humidity => ({
+        x: humidity.time,
+        y: humidity.value,
     }));
 
     return {
@@ -12,11 +17,19 @@ const chartData = (data) => {
         datasets: [
             {
                 label: 'Temperature',
-                data: pointsData,
+                data: temperatureData,
                 backgroundColor: [
-                    'rgb(255, 99, 132)',
+                    'rgb(19, 0, 132)',
                 ],
                 fill: false,
+            },
+            {
+                label: 'Humidity',
+                data: humidityData,
+                backgroundColor: [
+                    'rgb(255, 255, 132)',
+                ],
+                // fill: false,
             },
         ],
     };
@@ -24,20 +37,14 @@ const chartData = (data) => {
 
 const Chart = props => (
     <Line 
-        data={chartData(props.data)} 
-        width={200}
-        height={500}
+        data={chartData(props.data)}
         options={{ 
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             scales: {
                 xAxes: [{
-                    time: {
-                        unit: 'second'
-                    },
-                    ticks: {
-                        autoSkip: true,
-                        maxTicksLimit: 10,
-                        stepSize: .2
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'time'
                     }
                 }]
             }

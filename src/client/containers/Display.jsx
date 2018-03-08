@@ -7,16 +7,19 @@ import Chart from '../components/Chart';
 class Display extends Component {
     componentWillMount() {
         /* eslint-disable no-console */
-        console.log(`Mount: ${this.props.messages}`);
+        console.log(`Mount: ${this.props.sensorData}`);
     }
 
     render() {
         return (
             <div>
-                <Chart data={this.props.messages} />
+                <Chart data={this.props.sensorData} />
                 <ul>
-                    {this.props.messages.map(message => (
-                        <Message message={message} key={message} />
+                    {this.props.sensorData.temperature.map((temperature, index) => (
+                        <Message message={temperature} type="temperature" key={index} />
+                    ))}
+                    {this.props.sensorData.humidity.map((humidity, index) => (
+                        <Message message={humidity} type="humidity" key={index} />
                     ))}
                 </ul>
             </div>
@@ -25,11 +28,11 @@ class Display extends Component {
 }
 
 Display.propTypes = {
-    messages: PropTypes.arrayOf(PropTypes.number).isRequired,
+    sensorData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 const mapStateToProps = state => ({
-    messages: state.sensorData.data,
+    sensorData: state.sensorData,
 });
 
 export default connect(mapStateToProps)(Display);

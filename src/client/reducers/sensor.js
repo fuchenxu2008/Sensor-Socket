@@ -3,7 +3,8 @@
 import { IO_NEWDATA } from '../../shared/config';
 
 const initialState = {
-    data: [],
+    temperature: [],
+    humidity: [],
 };
 
 const sensorReducer = (state = initialState, action) => {
@@ -12,7 +13,17 @@ const sensorReducer = (state = initialState, action) => {
         /* eslint-disable no-console */
         console.log(`State: ${state.data}`);
         console.log(`[socket.io-client] New Data: ${action.payload}`);
-        return { ...state, data: state.data.concat(action.payload) };
+        return {
+            ...state,
+            humidity: state.humidity.concat({
+                value: action.payload.humidity,
+                time: action.payload.time,
+            }),
+            temperature: state.temperature.concat({
+                value: action.payload.temperature,
+                time: action.payload.time,
+            }),
+        };
     default:
         return state;
     }

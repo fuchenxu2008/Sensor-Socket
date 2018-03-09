@@ -23,7 +23,7 @@ const config = {
     yAxis: [{
         title: {
             text: 'Temperature',
-            style: { color: '#4CCDEB', font: '13px sans-serif' },
+            style: { color: '#3FEB77', font: '13px sans-serif' },
         },
         min: -20,
         max: 50,
@@ -31,10 +31,10 @@ const config = {
     }, {
         title: {
             text: 'Humidity',
-            style: { color: '#3FEB77', font: '13px sans-serif' },
+            style: { color: '#4CCDEB', font: '13px sans-serif' },
         },
-        min: 0,
-        max: 100,
+        min: 5,
+        max: 80,
         // opposite: true,
         plotLines: [{ value: 0, width: 1, color: '#4CCDEB' }],
     }],
@@ -64,7 +64,7 @@ class Chart extends Component {
             return;
         }
         const chart = this.refs.chart.getChart();
-        const shift = chart.series[0].data.length > 20;
+        const shift = chart.series[0].data.length > 3600;
         chart.series[0].addPoint({
             x: new Date().getTime(),
             y: data.reverse()[0].temperature,

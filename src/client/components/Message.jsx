@@ -6,9 +6,7 @@ type Props = {
 }
 
 const Message = ({ message, type }: Props) => (
-    <li>
-        {type}: {message.value}, {message.time}
-    </li>
+    <div>{message.value}, {message.time}</div>
 );
 
 export default Message;

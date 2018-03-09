@@ -59,7 +59,7 @@ class Chart extends Component {
     componentDidUpdate() {
         const { data } = this.props;
 
-        if (!data.temperature.reverse()[0] || !data.humidity.reverse()[0]) {
+        if (!data.reverse()[0] || !data.reverse()[0]) {
             console.log('oops');
             return;
         }
@@ -67,12 +67,12 @@ class Chart extends Component {
         const shift = chart.series[0].data.length > 20;
         chart.series[0].addPoint({
             x: new Date().getTime(),
-            y: data.temperature.reverse()[0].value,
+            y: data.reverse()[0].temperature,
         }, true, shift);
         chart.series[1].addPoint({
             x: new Date().getTime(),
             // x: convertTime(data.temperature.reverse()[0].time),
-            y: data.humidity.reverse()[0].value,
+            y: data.reverse()[0].humidity,
         }, true, shift);
     }
     render() {

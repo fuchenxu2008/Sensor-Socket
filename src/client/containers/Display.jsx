@@ -14,25 +14,37 @@ class Display extends Component {
         return (
             <div>
                 <Chart data={this.props.sensorData} />
-                <ul>
-                    {this.props.sensorData.temperature.map((temperature, index) => (
-                        <Message message={temperature} type="temperature" key={index} />
-                    ))}
-                    {this.props.sensorData.humidity.map((humidity, index) => (
-                        <Message message={humidity} type="humidity" key={index} />
-                    ))}
-                </ul>
+                <table className="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Temperature</th>
+                            <th>Humidity</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.props.sensorData.map(data => (
+                                <tr key={data.time}>
+                                    <td>{data.temperature}</td>
+                                    <td>{data.humidity}</td>
+                                    <td>{data.time}</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
             </div>
         );
     }
 }
 
 Display.propTypes = {
-    sensorData: PropTypes.objectOf(PropTypes.any).isRequired,
+    sensorData: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = state => ({
-    sensorData: state.sensorData,
+    sensorData: state.sensorData.dataSet,
 });
 
 export default connect(mapStateToProps)(Display);

@@ -1,10 +1,11 @@
 import { HOME_PAGE_ROUTE } from '../shared/routes';
+import { APP_NAME } from '../shared/config';
 
 import renderApp from './renderApp';
 
 export default (app) => {
     app.get(HOME_PAGE_ROUTE, (req, res) => {
-        res.send(renderApp(req.url));
+        res.send(renderApp(req.url, APP_NAME));
     });
 
     app.get('/500', () => {

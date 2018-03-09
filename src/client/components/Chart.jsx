@@ -67,12 +67,12 @@ class Chart extends Component {
         const shift = chart.series[0].data.length > 3600;
         chart.series[0].addPoint({
             x: new Date().getTime(),
-            y: data.reverse()[0].temperature,
+            y: parseFloat(data.reverse()[0].temperature),
         }, true, shift);
         chart.series[1].addPoint({
             x: new Date().getTime(),
             // x: convertTime(data.temperature.reverse()[0].time),
-            y: data.reverse()[0].humidity,
+            y: parseFloat(data.reverse()[0].humidity),
         }, true, shift);
     }
     render() {

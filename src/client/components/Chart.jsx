@@ -74,6 +74,8 @@ class Chart extends Component {
             // x: convertTime(data.temperature.reverse()[0].time),
             y: parseFloat(data.reverse()[0].humidity),
         }, true, shift);
+        console.log(parseFloat(data.reverse()[0].temperature), parseFloat(data.reverse()[0].humidity);
+        
     }
     render() {
         return (

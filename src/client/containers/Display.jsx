@@ -11,7 +11,7 @@ class Display extends Component {
     }
 
     render() {
-        console.log(`Mount: ${this.props.sensorData}`);
+        console.log(this.props.sensorData);
         return (
             <div>
                 <Chart data={this.props.sensorData} />

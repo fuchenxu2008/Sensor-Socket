@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts';
 
-const convertTime = time => new Date(Date.parse((time).replace(/-/g, '/'))).getTime();
+// const convertTime = time => new Date(Date.parse((time).replace(/-/g, '/'))).getTime();
 
 const config = {
     plotOptions: {
@@ -17,8 +17,8 @@ const config = {
     xAxis: {
         type: 'datetime',
         tickPixelInterval: 100,
-        minRange: 1000 * 60 * 0.1,
-        maxRange: 1000 * 60 * 0.1,
+        // minRange: 1000 * 60 * 0.1,
+        // maxRange: 1000 * 60 * 0.1,
     },
     yAxis: [{
         title: {
@@ -64,15 +64,16 @@ class Chart extends Component {
             return;
         }
         const chart = this.refs.chart.getChart();
+        const shift = chart.series[0].data.length > 20;
         chart.series[0].addPoint({
             x: new Date().getTime(),
             y: data.temperature.reverse()[0].value,
-        });
+        }, true, shift);
         chart.series[1].addPoint({
             x: new Date().getTime(),
             // x: convertTime(data.temperature.reverse()[0].time),
             y: data.humidity.reverse()[0].value,
-        });
+        }, true, shift);
     }
     render() {
         return (
